@@ -1,5 +1,5 @@
-//name=Your Name
-//id=Your ID
+//name=Gheorghe Georgusco
+//id=301377303
 
 /**
  * Class representing a Technician in the Lab Management system.
