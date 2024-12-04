@@ -1,5 +1,5 @@
-//name=Your Name
-//id=Your ID
+//name= Gheorghe Georgescu
+//id= 301377303
 
 /**
  * Driver class for the Lab Management system.
