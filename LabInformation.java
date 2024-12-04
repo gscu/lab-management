@@ -5,42 +5,69 @@
  * Driver class for the Lab Management system.
  * Provides a menu-driven interface for managing labs, technicians, and lab equipment.
  */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LabInformation {
-    // Instance variables for storing data
+public class LabInformation {// Start of class LabInformation
+	// Instance variables for storing data
     private List<Lab> labs;
     private List<Technician> technicians;
     private List<LabEquipment> labEquipment;
 
-    // Constructor
+    // Default constructor
     public LabInformation() {
         this.labs = new ArrayList<>();
         this.technicians = new ArrayList<>();
         this.labEquipment = new ArrayList<>();
     }
 
-    // Methods to handle different functionalities
+    private int getValidIntInput(Scanner scanner) {// Checks if user input has only integers
+        int input;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt();
+                scanner.nextLine();  // Consume the newline character after reading the integer
+                break; // Break the loop if a valid integer is entered
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+        return input;
+    }
 
-    // Create a new Lab
-    private void createLab(Scanner scanner) {
+    private String getValidPhoneNumber(Scanner scanner) {// Checks if input for phone number is of valid format
+        String phoneNumber;
+        while (true) {
+            phoneNumber = scanner.nextLine();
+            if (phoneNumber.matches("\\d{10}")) { // Check if it's 10 digits
+                break;
+            } else {
+                System.out.println("Invalid phone number. Please enter a 10-digit phone number.");
+            }
+        }
+        return phoneNumber;
+    }
+
+    // Methods to handle different functionalities
+    private void createLab(Scanner scanner) {// Creates a new Lab
         System.out.print("Enter Lab ID: ");
-        int labId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int labId = getValidIntInput(scanner); // This will now properly handle invalid input and not show the prompt twice
         System.out.print("Enter Lab Name: ");
         String labName = scanner.nextLine();
-        System.out.print("Enter Lab Phone Number: ");
-        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Enter Lab Phone Number (10 digits): ");
+        String phoneNumber = getValidPhoneNumber(scanner);
 
         Lab lab = new Lab(labId, labName, phoneNumber);
         labs.add(lab);
         System.out.println("Lab created successfully!\n");
     }
 
-    // Display information of all Labs
-    private void displayLabs() {
+
+    private void displayLabs() {// Displays information of all Labs
         if (labs.isEmpty()) {
             System.out.println("No labs available.\n");
         } else {
@@ -50,19 +77,23 @@ public class LabInformation {
         }
     }
 
-    // Create a new Technician
-    private void createTechnician(Scanner scanner) {
+    private void createTechnician(Scanner scanner) {// Creates a new Technician
         System.out.print("Enter Technician ID: ");
-        int technicianId = scanner.nextInt();
+        int technicianId = getValidIntInput(scanner);
         scanner.nextLine(); // Consume newline
+
         System.out.print("Enter Technician First Name: ");
         String firstName = scanner.nextLine();
+
         System.out.print("Enter Technician Last Name: ");
         String lastName = scanner.nextLine();
+
         System.out.print("Enter Technician Email: ");
         String email = scanner.nextLine();
-        System.out.print("Enter Technician Phone Number: ");
-        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Enter Technician Phone Number (10 digits): ");
+        String phoneNumber = getValidPhoneNumber(scanner);
+
         System.out.print("Enter Technician Specialty: ");
         String specialty = scanner.nextLine();
 
@@ -71,8 +102,7 @@ public class LabInformation {
         System.out.println("Technician created successfully!\n");
     }
 
-    // Display information of all Technicians
-    private void displayTechnicians() {
+    private void displayTechnicians() {// Displays information of all Technicians
         if (technicians.isEmpty()) {
             System.out.println("No technicians available.\n");
         } else {
@@ -82,21 +112,28 @@ public class LabInformation {
         }
     }
 
-    // Assign a Technician to a Lab
-    private void assignTechnicianToLab(Scanner scanner) {
+    private void assignTechnicianToLab(Scanner scanner) {// Assigns a Technician to a Lab
         System.out.print("Enter Technician ID to assign: ");
-        int technicianId = scanner.nextInt();
-        System.out.print("Enter Lab ID to assign the technician to: ");
-        int labId = scanner.nextInt();
+        int technicianId = getValidIntInput(scanner);
 
-        Technician technician = technicians.stream()
-                .filter(t -> t.getTechnicianId() == technicianId)
-                .findFirst()
-                .orElse(null);
-        Lab lab = labs.stream()
-                .filter(l -> l.getLabId() == labId)
-                .findFirst()
-                .orElse(null);
+        System.out.print("Enter Lab ID to assign the technician to: ");
+        int labId = getValidIntInput(scanner);
+
+        Technician technician = null;
+        for (Technician tech : technicians) {
+            if (tech.getTechnicianId() == technicianId) {
+                technician = tech;
+                break;
+            }
+        }
+
+        Lab lab = null;
+        for (Lab l : labs) {
+            if (l.getLabId() == labId) {
+                lab = l;
+                break;
+            }
+        }
 
         if (technician != null && lab != null) {
             lab.addTechnician(technician);
@@ -106,25 +143,31 @@ public class LabInformation {
         }
     }
 
-    // Create new Lab Equipment
-    private void createLabEquipment(Scanner scanner) {
+    private void createLabEquipment(Scanner scanner) {// Creates new Lab Equipment
         System.out.print("Enter Equipment ID: ");
-        int equipmentId = scanner.nextInt();
+        int equipmentId = getValidIntInput(scanner);
         scanner.nextLine(); // Consume newline
+
         System.out.print("Enter Equipment Name: ");
         String equipmentName = scanner.nextLine();
+
         System.out.print("Enter Lab ID for the equipment: ");
-        int labId = scanner.nextInt();
+        int labId = getValidIntInput(scanner);
+
         System.out.print("Enter Equipment State (1 for Functional, 0 for Non-Functional): ");
         boolean state = scanner.nextInt() == 1;
 
         LabEquipment equipment = new LabEquipment(equipmentId, equipmentName, labId, state);
         labEquipment.add(equipment);
 
-        Lab lab = labs.stream()
-                .filter(l -> l.getLabId() == labId)
-                .findFirst()
-                .orElse(null);
+        Lab lab = null;
+        for (Lab l : labs) {
+            if (l.getLabId() == labId) {
+                lab = l;
+                break;
+            }
+        }
+
         if (lab != null) {
             lab.addEquipment(equipment);
         }
@@ -132,8 +175,7 @@ public class LabInformation {
         System.out.println("Lab Equipment created successfully!\n");
     }
 
-    // Display information of all Lab Equipment
-    private void displayLabEquipment() {
+    private void displayLabEquipment() {// Displays information of all Lab Equipment
         if (labEquipment.isEmpty()) {
             System.out.println("No lab equipment available.\n");
         } else {
@@ -143,8 +185,7 @@ public class LabInformation {
         }
     }
 
-    // Main menu
-    private void showMenu() {
+    private void showMenu() {// Main menu
         System.out.println("===== Lab Management System =====");
         System.out.println("1. Create Lab");
         System.out.println("2. Display Labs");
@@ -157,15 +198,13 @@ public class LabInformation {
         System.out.print("Choose an option: ");
     }
 
-    // Driver method
-    public void start() {
+    public void start() {// Driver method
         Scanner scanner = new Scanner(System.in);
         int choice;
 
         do {
             showMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            choice = getValidIntInput(scanner);
 
             switch (choice) {
                 case 1 -> createLab(scanner);
@@ -175,17 +214,15 @@ public class LabInformation {
                 case 5 -> assignTechnicianToLab(scanner);
                 case 6 -> createLabEquipment(scanner);
                 case 7 -> displayLabEquipment();
-                case 8 -> System.out.println("Exiting... Thank you!");
+                case 8 -> System.out.println("Exiting...");
                 default -> System.out.println("Invalid choice. Please try again.\n");
             }
         } while (choice != 8);
-
         scanner.close();
     }
 
-    // Main method
-    public static void main(String[] args) {
+    public static void main(String[] args) {// Main method
         LabInformation app = new LabInformation();
         app.start();
     }
-}
+}// End of class LabInformation

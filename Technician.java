@@ -5,7 +5,8 @@
  * Class representing a Technician in the Lab Management system.
  * This class encapsulates details about a technician such as ID, name, contact details, and specialty.
  */
-public class Technician {
+
+public class Technician {//Start of class Technician
     // Instance variables
     private int technicianId;
     private String firstName;
@@ -14,11 +15,7 @@ public class Technician {
     private String phoneNumber;
     private String specialty;
 
-    // Constructors
-    /**
-     * Default constructor.
-     */
-    public Technician() {
+    public Technician() {// Default constructor
         this.technicianId = 0;
         this.firstName = "";
         this.lastName = "";
@@ -28,13 +25,13 @@ public class Technician {
     }
 
     /**
-     * Parameterized constructor.
-     * @param technicianId the technician's unique ID
-     * @param firstName the technician's first name
-     * @param lastName the technician's last name
-     * @param email the technician's email address
-     * @param phoneNumber the technician's phone number
-     * @param specialty the technician's area of expertise
+     * Constructor with parameters
+     * technicianId the technician's unique ID
+     * firstName the technician's first name
+     * lastName the technician's last name
+     * email the technician's email address
+     * phoneNumber the technician's phone number
+     * specialty the technician's area of expertise
      */
     public Technician(int technicianId, String firstName, String lastName, String email, String phoneNumber, String specialty) {
         this.technicianId = technicianId;
@@ -94,19 +91,13 @@ public class Technician {
         this.specialty = specialty;
     }
 
-    // Method to display technician's information
-    /**
-     * Returns a formatted string containing the technician's information.
-     * @return technician's details as a string
-     */
-    public String getTechnicianInfo() {
+    public String getTechnicianInfo() {//Method to display technician's information and returns a formatted string containing the technician's information
         return String.format("Technician ID: %d%nName: %s %s%nEmail: %s%nPhone: %s%nSpecialty: %s%n",
                 technicianId, firstName, lastName, email, phoneNumber, specialty);
     }
-
-    // Main method for testing purposes
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) {// Main method for testing purposes
         Technician technician = new Technician(101, "John", "Doe", "john.doe@example.com", "123-456-7890", "Networking");
         System.out.println(technician.getTechnicianInfo());
     }
-}
+}//End of class Technician
