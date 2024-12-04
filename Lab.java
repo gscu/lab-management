@@ -1,5 +1,5 @@
-//name=Your Name
-//id=Your ID
+//name= Jude Kerwynn Nacario
+//id= 301438533
 
 /**
  * Class representing a Lab in the Lab Management system.
