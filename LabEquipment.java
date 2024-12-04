@@ -1,5 +1,5 @@
-//name=Jude Kerwynn Nacario
-//id=301438533
+//name= Jude Kerwynn Nacario
+//id= 301438533
 
 /**
  * Class representing Lab Equipment in the Lab Management system.
