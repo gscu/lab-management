@@ -7,7 +7,7 @@
  */
 
 public class LabEquipment {//Start of class LabEquipment
-	// Instance variables
+    // Instance variables
     private int labEquipmentId;
     private String labEquipmentName;
     private int labId;
@@ -26,7 +26,7 @@ public class LabEquipment {//Start of class LabEquipment
         this.labId = labId;
         this.equipmentState = equipmentState;
     }
-    
+
     // Getters and Setters
     public int getLabEquipmentId() {
         return labEquipmentId;
@@ -66,9 +66,9 @@ public class LabEquipment {//Start of class LabEquipment
                 labEquipmentId, labEquipmentName, labId, (equipmentState ? "Functional" : "Non-Functional"));
     }
 
-    
+
     public static void main(String[] args) {// Main method for testing purposes
         LabEquipment equipment = new LabEquipment(101, "Microscope", 1, true);
         System.out.println(equipment.getLabEquipmentInfo());
     }
-}//End of class LabEquipment
+}
