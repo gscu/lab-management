@@ -1,8 +1,5 @@
-package lab.management;
 // name= Gheorghe Georgescu
 // id= 301377303
-//
-//
 
 /**
  * Driver class for the Lab Management system.
@@ -13,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LabInformation { // Start of class LabInformation
-    // Instance variables for storing data
+public class LabInformation {
+    // Instance variables for storing data into lists
     private List<Lab> labs;
     private List<Technician> technicians;
     private List<LabEquipment> labEquipment;
@@ -83,7 +80,6 @@ public class LabInformation { // Start of class LabInformation
     private void createTechnician(Scanner input) { // Creates a new Technician
         System.out.print("Enter Technician ID: ");
         int technicianId = getValidIntInput(input);
-        //input.nextLine(); // Consumes a newline
 
         System.out.print("Enter Technician First Name: ");
         String firstName = input.nextLine();
@@ -149,7 +145,6 @@ public class LabInformation { // Start of class LabInformation
     private void createLabEquipment(Scanner input) { // Creates new Lab Equipment
         System.out.print("Enter Equipment ID: ");
         int equipmentId = getValidIntInput(input);
-        //input.nextLine(); // Consumes newline
 
         System.out.print("Enter Equipment Name: ");
         String equipmentName = input.nextLine();
@@ -192,7 +187,7 @@ public class LabInformation { // Start of class LabInformation
             lab.addEquipment(equipment);
             System.out.println("Equipment assigned to Lab successfully!\n");
         } else {
-            System.out.println("Invalid Equipment ID or Lab ID.\n"); // Rare else condition given it passed for loops at this stage
+            System.out.println("Invalid Equipment ID or Lab ID.\n"); // If user enters wrong info
         }
     }
 
