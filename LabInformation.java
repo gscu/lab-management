@@ -232,7 +232,7 @@ public class LabInformation {
                 case 6 -> createLabEquipment(scanner);
                 case 7 -> displayLabEquipment();
                 case 8 -> assignLabEquipmentToLab(scanner);
-                case 9 -> System.out.println("Exiting...");
+                case 9 -> System.out.println("Exiting... \n\nSuccessfully logged off.");
                 default -> System.out.println("Invalid choice. Please try again.\n");
             }
         } while (choice != 9);
