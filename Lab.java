@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lab  {// Start of class Lab
-	// Instance variables
+    // Instance variables
     private int labId;
     private String labName;
     private String phoneNumber;
     private List<LabEquipment> labEquipment;
     private List<Technician> technicians;
-    
+
     public Lab() {// Default constructor
         this.labId = 0;
         this.labName = "";
@@ -75,7 +75,7 @@ public class Lab  {// Start of class Lab
     public void addTechnician(Technician technician) {// Adds a technician to the lab.
         technicians.add(technician);
     }
-    
+
     public String getLabInfo() {// Returns a formatted string containing the lab's information.
         StringBuilder info = new StringBuilder();
         info.append(String.format("Lab ID: %d%nLab Name: %s%nPhone: %s%n", labId, labName, phoneNumber));
